@@ -1,0 +1,41 @@
+<h2 class="text-xl font-semibold mb-3 text-gray-800">Liste des tâches</h2>
+
+<!-- Input pour saisir la nouvelle tâche -->
+<div class="mb-3">
+  <input type="text" [(ngModel)]="newTask" placeholder="Nouvelle tâche"
+         class="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+</div>
+
+<!-- Bouton pour ajouter la tâche à la liste -->
+<div class="mb-3">
+  <button (click)="addTask()"
+          class="bg-blue-500 text-white rounded-md px-4 py-2 text-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    Ajouter
+  </button>
+</div>
+
+<!-- Table pour afficher les tâches -->
+<table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
+  <thead>
+  <tr class="bg-gray-100 text-left text-sm font-medium">
+    <th class="px-3 py-2 border-b">Nom de la tâche</th>
+    <th class="px-3 py-2 border-b">État</th>
+    <th class="px-3 py-2 border-b">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let task of tasks; let i = index" class="hover:bg-gray-50">
+    <td class="px-3 py-2 border-b text-sm">{{ task.name }}</td>
+    <td class="px-3 py-2 border-b">
+      <input type="checkbox" [(ngModel)]="task.completed" (change)="toggleTaskCompletion(i)"
+             class="form-checkbox h-4 w-4 text-blue-500 focus:ring-2 focus:ring-blue-500" />
+    </td>
+    <td class="px-3 py-2 border-b">
+      <button (click)="removeTask(i)"
+              class="bg-red-500 text-white rounded-md px-3 py-1 text-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">
+        Supprimer
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
